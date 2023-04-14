@@ -10,6 +10,7 @@ package com.google.youtube.v3.dto;
  */
 public class YouTubeVideoStatistics extends YouTubeStatistics
 {
+  private Integer commentCount;
   private Integer likeCount;
   private Integer viewCount;
 
@@ -18,6 +19,15 @@ public class YouTubeVideoStatistics extends YouTubeStatistics
    */
   public YouTubeVideoStatistics()
   {
+  }
+
+
+  /**
+   * @return the commentCount
+   */
+  public Integer getCommentCount()
+  {
+    return commentCount;
   }
 
 
@@ -36,6 +46,16 @@ public class YouTubeVideoStatistics extends YouTubeStatistics
   public Integer getViewCount()
   {
     return viewCount;
+  }
+
+
+  /**
+   * @param commentCount the commentCount to set
+   */
+  public void setCommentCount(
+    Integer commentCount)
+  {
+    this.commentCount = commentCount;
   }
 
 

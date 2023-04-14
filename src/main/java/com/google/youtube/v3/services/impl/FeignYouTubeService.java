@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
-import com.google.youtube.v3.dto.YouTubeContentDetails;
+import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
 import com.google.youtube.v3.dto.YouTubeResource;
 import com.google.youtube.v3.dto.YouTubeResponse;
@@ -42,7 +42,7 @@ public interface FeignYouTubeService {
 	 * @return
 	 */
   @GetMapping("/search")
-	public <CD extends YouTubeContentDetails, S extends YouTubeSnippet, RS extends YouTubeResource<CD, S>> YouTubeResponse<CD,S,RS> search(//
+	public <S extends YouTubeSnippet, RS extends YouTubeResource<S>> YouTubeResponse<S,RS> search(//
 	  @RequestParam("part") String part, //
 			@RequestParam("maxResults") Integer maxResults, //
 			@RequestParam("pageToken") String pageToken, //
@@ -70,12 +70,32 @@ public interface FeignYouTubeService {
   @GetMapping("/channels")
 	public YouTubeChannelResponse getChannels(//
 	  @RequestParam("part") String part, //
-	  @RequestParam("id") String id,//
+      @RequestParam("id") String id,//
 	  @RequestParam("maxResults") Integer maxResults, //
       @RequestParam("pageToken") String pageToken, //
       @RequestParam("key") String key,//
       @RequestParam("fields") String fields);
 
+  
+  /**
+   * @param part specifies a comma-separated list of one or more channel resource properties that the API response will include
+   * @param maxResults  specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
+   * @param pageToken identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
+   * @param key        Google API key
+   * @param fields The fields parameter filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
+   * @return
+   */
+  @GetMapping("/commentThreads")
+  public YouTubeCommentThreadResponse getCommentThreads(//
+    @RequestParam("part") String part, //
+    @RequestParam(value="channelId", required = false) String channelId,//
+    @RequestParam(value="id", required = false) String id,//
+    @RequestParam(value="videoId", required = false) String videoId,//
+    @RequestParam("maxResults") Integer maxResults, //
+    @RequestParam("pageToken") String pageToken, //
+    @RequestParam("key") String key,//
+    @RequestParam("fields") String fields);
+  
 	/**
 	 * Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
 	 * 

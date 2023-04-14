@@ -8,10 +8,11 @@ package com.google.youtube.v3.dto;
  * @author gary_kephart
  *
  */
-public class YouTubeVideo extends YouTubeResource<YouTubeVideoContentDetails, YouTubeVideoSnippet>
+public class YouTubeVideo extends YouTubeResource<YouTubeVideoSnippet>
 {
-  private String                 id;
-  private YouTubeVideoStatistics statistics;
+  private YouTubeVideoContentDetails contentDetails;
+  private String                     id;
+  private YouTubeVideoStatistics     statistics;
 
   public YouTubeVideo()
   {
@@ -21,6 +22,15 @@ public class YouTubeVideo extends YouTubeResource<YouTubeVideoContentDetails, Yo
   public YouTubeVideo(String id)
   {
     this.id = id;
+  }
+
+
+  /**
+   * @return the contentDetails
+   */
+  public YouTubeVideoContentDetails getContentDetails()
+  {
+    return contentDetails;
   }
 
 
@@ -39,6 +49,16 @@ public class YouTubeVideo extends YouTubeResource<YouTubeVideoContentDetails, Yo
   public YouTubeVideoStatistics getStatistics()
   {
     return statistics;
+  }
+
+
+  /**
+   * @param contentDetails the contentDetails to set
+   */
+  public void setContentDetails(
+    YouTubeVideoContentDetails contentDetails)
+  {
+    this.contentDetails = contentDetails;
   }
 
 

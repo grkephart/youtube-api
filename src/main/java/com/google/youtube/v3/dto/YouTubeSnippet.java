@@ -48,6 +48,65 @@ playlistitem snippet
         "height": unsigned integer
       }
     },
+    
+commentThread snippet
+  "snippet": {
+    "channelId": string,
+    "videoId": string,
+    "topLevelComment": comments Resource,
+    "canReply": boolean,
+    "totalReplyCount": unsigned integer,
+    "isPublic": boolean
+  },
+
+comment snippet
+  "snippet": {
+    "authorDisplayName": string,
+    "authorProfileImageUrl": string,
+    "authorChannelUrl": string,
+    "authorChannelId": {
+      "value": string
+    },
+    "channelId": string,
+    "videoId": string,
+    "textDisplay": string,
+    "textOriginal": string,
+    "parentId": string,
+    "canRate": boolean,
+    "viewerRating": string,
+    "likeCount": unsigned integer,
+    "moderationStatus": string,
+    "publishedAt": datetime,
+    "updatedAt": datetime
+  }
+
+video snippet
+  "snippet": {
+    "publishedAt": datetime,
+    "channelId": string,
+    "title": string,
+    "description": string,
+    "thumbnails": {
+      (key): {
+        "url": string,
+        "width": unsigned integer,
+        "height": unsigned integer
+      }
+    },
+    "channelTitle": string,
+    "tags": [
+      string
+    ],
+    "categoryId": string,
+    "liveBroadcastContent": string,
+    "defaultLanguage": string,
+    "localized": {
+      "title": string,
+      "description": string
+    },
+    "defaultAudioLanguage": string
+  },
+
 
  */
 

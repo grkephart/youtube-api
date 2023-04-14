@@ -8,21 +8,20 @@ package com.google.youtube.v3.dto;
  * @author gary_kephart
  *
  */
-public class YouTubePlaylistItemsResponse extends
-    YouTubeResponse<YouTubePlaylistItemContentDetails, YouTubePlaylistItemsSnippet, YouTubePlaylistItems>
+public class YouTubePlaylistItemsResponse
+    extends YouTubeResponse<YouTubePlaylistItemsSnippet, YouTubePlaylistItems>
 {
   private String playlistId;
 
-  
   /**
    * 
    */
   public YouTubePlaylistItemsResponse()
   {
-    
+
   }
-  
-  
+
+
   public YouTubePlaylistItemsResponse(String playListId)
   {
     this.playlistId = playListId;

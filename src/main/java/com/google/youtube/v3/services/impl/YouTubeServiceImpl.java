@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
-import com.google.youtube.v3.dto.YouTubeContentDetails;
+import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
 import com.google.youtube.v3.dto.YouTubeResource;
 import com.google.youtube.v3.dto.YouTubeResponse;
@@ -43,6 +43,23 @@ public class YouTubeServiceImpl implements YouTubeService
     String fields)
   {
     return service.getChannels(part, id, maxResults, pageToken, this.key, fields);
+  }
+  
+
+  /* (non-Javadoc)
+   * @see com.google.youtube.v3.services.YouTubeService#getChannels(java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
+   */
+  @Override
+  public YouTubeCommentThreadResponse getCommentThreads(
+    String part,
+    String channelId,
+    String id,
+    String videoId,
+    Integer maxResults,
+    String pageToken,
+    String fields)
+  {
+    return service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key, fields);
   }
 
 
@@ -80,7 +97,7 @@ public class YouTubeServiceImpl implements YouTubeService
    * @see com.google.youtube.v3.services.YouTubeService#search(java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
    */
   @Override
-  public <CD extends YouTubeContentDetails, S extends YouTubeSnippet, RS extends YouTubeResource<CD, S>> YouTubeResponse<CD, S, RS> search(
+  public <S extends YouTubeSnippet, RS extends YouTubeResource<S>> YouTubeResponse<S, RS> search(
     String part,
     Integer maxResults,
     String pageToken,

@@ -8,12 +8,21 @@ package com.google.youtube.v3.dto;
  * @author gary_kephart
  *
  */
-public class YouTubeChannel
-    extends YouTubeResource<YouTubeChannelContentDetails, YouTubeChannelSnippet>
+public class YouTubeChannel extends YouTubeResource<YouTubeChannelSnippet>
 {
+  YouTubeChannelContentDetails     contentDetails;
   private String                   id;
   private String                   kind;
   private YouTubeChannelStatistics statistics;
+
+  /**
+   * @return the contentDetails
+   */
+  public YouTubeChannelContentDetails getContentDetails()
+  {
+    return contentDetails;
+  }
+
 
   /**
    * @return the id
@@ -39,6 +48,16 @@ public class YouTubeChannel
   public YouTubeChannelStatistics getStatistics()
   {
     return statistics;
+  }
+
+
+  /**
+   * @param contentDetails the contentDetails to set
+   */
+  public void setContentDetails(
+    YouTubeChannelContentDetails contentDetails)
+  {
+    this.contentDetails = contentDetails;
   }
 
 

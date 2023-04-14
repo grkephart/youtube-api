@@ -5,22 +5,48 @@ package com.google.youtube.v3.dto;
 
 
 /**
+ * Breakdown of resource types:
+ * 
+ * 1 - Channel
+ * 
+ * - snippet
+ * - contentDetails
+ *   - relatedPlaylists
+ *     - uploads
+ * - statistics
+ * - topicDetails
+ * ...
+ * 
+ * 2 -Comment
+ * 
+ * - snippet
+ * 
+ * 3 - Comment Thread
+ * 
+ * - snippet
+ * - replies
+ *   - comments []
+ *
+ * 4 - Playlist Items
+ * 
+ * - snippet
+ * - contentDetails
+ *   - videoId
+ * - status
+ * 
+ * 5 - Video Response
+ * 
+ * - snippet
+ * - contentDetails
+ * - status
+ * - statistics
+ * 
  * @author gary_kephart
  *
  */
-public class YouTubeResource<CD extends YouTubeContentDetails, S extends YouTubeSnippet>
+public class YouTubeResource<S extends YouTubeSnippet>
 {
-  private CD contentDetails;
-  private S  snippet;
-
-  /**
-   * @return the contentDetails
-   */
-  public CD getContentDetails()
-  {
-    return contentDetails;
-  }
-
+  private S snippet;
 
   /**
    * @return
@@ -28,16 +54,6 @@ public class YouTubeResource<CD extends YouTubeContentDetails, S extends YouTube
   public S getSnippet()
   {
     return this.snippet;
-  }
-
-
-  /**
-   * @param contentDetails the contentDetails to set
-   */
-  public void setContentDetails(
-    CD contentDetails)
-  {
-    this.contentDetails = contentDetails;
   }
 
 

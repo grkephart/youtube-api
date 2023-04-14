@@ -1,8 +1,7 @@
 package com.google.youtube.v3.dto;
 
 
-public class YouTubeRelatedPlaylists
-    extends YouTubeResource<YouTubeRelatedPlaylistsContentDetails, YouTubeSnippet>
+public class YouTubeRelatedPlaylists extends YouTubeResource<YouTubeSnippet>
 {
   private String likes;
   private String uploads;

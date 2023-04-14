@@ -5,10 +5,6 @@ public class YouTubePlaylistItemContentDetails extends YouTubeContentDetails
 {
   private String videoId;
 
-  public YouTubePlaylistItemContentDetails()
-  {
-  }
-
 
   /**
    * @return the videoId

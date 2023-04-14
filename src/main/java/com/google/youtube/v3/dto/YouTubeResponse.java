@@ -5,10 +5,11 @@ package com.google.youtube.v3.dto;
 
 
 /**
+ * 
  * @author gary_kephart
  *
  */
-public class YouTubeResponse<CD extends YouTubeContentDetails, S extends YouTubeSnippet, R extends YouTubeResource<CD, S>>
+public class YouTubeResponse<S extends YouTubeSnippet, R extends YouTubeResource<S>>
 {
   private R[]             items;
   private String          kind;

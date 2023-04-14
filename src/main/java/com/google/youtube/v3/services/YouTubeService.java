@@ -5,7 +5,7 @@ package com.google.youtube.v3.services;
 
 
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
-import com.google.youtube.v3.dto.YouTubeContentDetails;
+import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
 import com.google.youtube.v3.dto.YouTubeResource;
 import com.google.youtube.v3.dto.YouTubeResponse;
@@ -39,7 +39,7 @@ public interface YouTubeService
    * @param fields The fields parameter filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
    * @return
    */
-  public <CD extends YouTubeContentDetails, S extends YouTubeSnippet, RS extends YouTubeResource<CD, S>> YouTubeResponse<CD, S, RS> search(
+  public <S extends YouTubeSnippet, RS extends YouTubeResource<S>> YouTubeResponse<S, RS> search(
     String part,
     Integer maxResults,
     String pageToken,
@@ -72,16 +72,39 @@ public interface YouTubeService
 
 
   /**
+   * Returns a list of comment threads that match the API request parameters.
+   * 
+   * A call to this method has a quota cost of 1 unit.
+   *  
+   * @param part       specifies a comma-separated list of one or more commentThread resource properties that the API response will include.
+   * @param channelId  instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)
+   * @param id         specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.
+   * @param videoId    instructs the API to return comment threads associated with the specified video ID.
+   * @param maxResults specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
+   * @param pageToken  identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
+   * @param fields     filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
+   * @return
+   */
+  public YouTubeCommentThreadResponse getCommentThreads(//
+    String part,
+    String channelId,
+    String id,
+    String videoId,
+    Integer maxResults,
+    String pageToken,
+    String fields);
+
+
+  /**
    * Returns a collection of playlist items that match the API request parameters. You can retrieve all of the playlist items in a specified playlist or retrieve one or more playlist items by their unique IDs.
    * 
    * A call to this method has a quota cost of 1 unit.
    * 
-   * @param part       specifies a comma-separated list of one or more channel
-   *                   resource properties that the API response will include
+   * @param part       specifies a comma-separated list of one or more channel resource properties that the API response will include
    * @param playlistId
-   * @param maxResults  specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
-   * @param pageToken identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
-   * @param fields The fields parameter filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
+   * @param maxResults specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
+   * @param pageToken  identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
+   * @param fields     filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
    * @return
    */
   public YouTubePlaylistItemsResponse getPlaylistItems(//
