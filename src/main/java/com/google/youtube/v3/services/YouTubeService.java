@@ -4,6 +4,11 @@
 package com.google.youtube.v3.services;
 
 
+import java.util.List;
+
+import java.util.List;
+
+import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
@@ -45,6 +50,23 @@ public interface YouTubeService
     String pageToken,
     String q,
     String type,
+    String fields);
+
+
+  /**
+   * Returns a collection of zero or more channel resources that match the request criteria.
+   * 
+   * @param part specifies a comma-separated list of one or more channel resource
+   *             properties that the API response will include
+   * @param id   specifies a comma-separated list of the YouTube channel ID(s) for
+   *             the resource(s) that are being retrieved. In a channel resource,
+   *             the id property specifies the channel's YouTube channel ID
+   * @param fields The fields parameter filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
+   * @return
+   */
+  public List<YouTubeChannel> getChannels(
+    String part,
+    String id,
     String fields);
 
 

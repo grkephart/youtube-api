@@ -4,10 +4,15 @@
 package com.google.youtube.v3.services.impl;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
@@ -26,10 +31,9 @@ import com.google.youtube.v3.services.YouTubeService;
 public class YouTubeServiceImpl implements YouTubeService
 {
   @Value("${google.apiKey}")
-  private String key;
+  private String              key;
   @Autowired
   private FeignYouTubeService service;
-  
 
   /* (non-Javadoc)
    * @see com.google.youtube.v3.services.YouTubeService#getChannels(java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
@@ -44,7 +48,33 @@ public class YouTubeServiceImpl implements YouTubeService
   {
     return service.getChannels(part, id, maxResults, pageToken, this.key, fields);
   }
-  
+
+
+  /* (non-Javadoc)
+   * @see com.google.youtube.v3.services.YouTubeService#getChannels(java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
+   */
+  @Override
+  public List<YouTubeChannel> getChannels(
+    String part,
+    String id,
+    String fields)
+  {
+    List<YouTubeChannel> channels = new ArrayList<YouTubeChannel>();
+    String pageToken = null;
+
+    do
+    {
+      YouTubeChannelResponse channelResponse = service.getChannels(part, id, YouTubeService.MAX_RESULTS, pageToken, this.key, fields);
+     
+      channels.addAll(Arrays.asList(channelResponse.getItems()));
+
+      pageToken = channelResponse.getNextPageToken();
+
+    } while (pageToken != null);
+
+    return channels;
+  }
+
 
   /* (non-Javadoc)
    * @see com.google.youtube.v3.services.YouTubeService#getChannels(java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
@@ -59,7 +89,8 @@ public class YouTubeServiceImpl implements YouTubeService
     String pageToken,
     String fields)
   {
-    return service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key, fields);
+    return service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key,
+      fields);
   }
 
 

@@ -10,25 +10,25 @@ package com.google.youtube.v3.dto;
  */
 public class YouTubeCommentSnippet extends YouTubeSnippet
 {
-  private String  authorChannelId;
-  private String  authorChannelUrl;
-  private String  authorDisplayName;
-  private String  authorProfileImageUrl;
-  private Boolean canRate;
-  private String  channelId;
-  private Integer likeCount;
-  private String  moderationStatus;
-  private String  parentId;
-  private String  textDisplay;
-  private String  textOriginal;
-  private String  updatedAt;
-  private String  videoId;
-  private String  viewerRating;
+  private YouTubeCommentAuthorChannelId authorChannelId;
+  private String                        authorChannelUrl;
+  private String                        authorDisplayName;
+  private String                        authorProfileImageUrl;
+  private Boolean                       canRate;
+  private String                        channelId;
+  private Integer                       likeCount;
+  private String                        moderationStatus;
+  private String                        parentId;
+  private String                        textDisplay;
+  private String                        textOriginal;
+  private String                        updatedAt;
+  private String                        videoId;
+  private String                        viewerRating;
 
   /**
    * @return the authorChannelId
    */
-  public String getAuthorChannelId()
+  public YouTubeCommentAuthorChannelId getAuthorChannelId()
   {
     return authorChannelId;
   }
@@ -155,7 +155,7 @@ public class YouTubeCommentSnippet extends YouTubeSnippet
    * @param authorChannelId the authorChannelId to set
    */
   public void setAuthorChannelId(
-    String authorChannelId)
+    YouTubeCommentAuthorChannelId authorChannelId)
   {
     this.authorChannelId = authorChannelId;
   }
