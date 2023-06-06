@@ -5,6 +5,7 @@ public class YouTubePlaylistItems extends YouTubeResource<YouTubePlaylistItemsSn
 {
   private YouTubePlaylistItemContentDetails contentDetails;
   private String                            id;
+  private YouTubePlaylistItemStatus         status;
 
   /**
    * @return the contentDetails
@@ -27,6 +28,15 @@ public class YouTubePlaylistItems extends YouTubeResource<YouTubePlaylistItemsSn
 
 
   /**
+   * @return the status
+   */
+  public YouTubePlaylistItemStatus getStatus()
+  {
+    return status;
+  }
+
+
+  /**
    * @param contentDetails the contentDetails to set
    */
   public void setContentDetails(
@@ -43,6 +53,16 @@ public class YouTubePlaylistItems extends YouTubeResource<YouTubePlaylistItemsSn
     String id)
   {
     this.id = id;
+  }
+
+
+  /**
+   * @param status the status to set
+   */
+  public void setStatus(
+    YouTubePlaylistItemStatus status)
+  {
+    this.status = status;
   }
 
 }

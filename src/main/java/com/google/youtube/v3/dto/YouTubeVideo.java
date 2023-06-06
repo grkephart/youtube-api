@@ -13,6 +13,7 @@ public class YouTubeVideo extends YouTubeResource<YouTubeVideoSnippet>
   private YouTubeVideoContentDetails contentDetails;
   private String                     id;
   private YouTubeVideoStatistics     statistics;
+  private YouTubeVideoStatus         status;
 
   public YouTubeVideo()
   {
@@ -53,6 +54,15 @@ public class YouTubeVideo extends YouTubeResource<YouTubeVideoSnippet>
 
 
   /**
+   * @return the status
+   */
+  public YouTubeVideoStatus getStatus()
+  {
+    return status;
+  }
+
+
+  /**
    * @param contentDetails the contentDetails to set
    */
   public void setContentDetails(
@@ -79,5 +89,15 @@ public class YouTubeVideo extends YouTubeResource<YouTubeVideoSnippet>
     YouTubeVideoStatistics statistics)
   {
     this.statistics = statistics;
+  }
+
+
+  /**
+   * @param status the status to set
+   */
+  public void setStatus(
+    YouTubeVideoStatus status)
+  {
+    this.status = status;
   }
 }
