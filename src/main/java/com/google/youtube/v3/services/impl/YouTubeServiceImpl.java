@@ -16,6 +16,7 @@ import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
+import com.google.youtube.v3.dto.YouTubeRatingResponse;
 import com.google.youtube.v3.dto.YouTubeResource;
 import com.google.youtube.v3.dto.YouTubeResponse;
 import com.google.youtube.v3.dto.YouTubeSnippet;
@@ -64,8 +65,9 @@ public class YouTubeServiceImpl implements YouTubeService
 
     do
     {
-      YouTubeChannelResponse channelResponse = service.getChannels(part, id, YouTubeService.MAX_RESULTS, pageToken, this.key, fields);
-     
+      YouTubeChannelResponse channelResponse = service.getChannels(part, id,
+        YouTubeService.MAX_RESULTS, pageToken, this.key, fields);
+
       channels.addAll(Arrays.asList(channelResponse.getItems()));
 
       pageToken = channelResponse.getNextPageToken();
@@ -110,6 +112,18 @@ public class YouTubeServiceImpl implements YouTubeService
 
 
   /* (non-Javadoc)
+   * @see com.google.youtube.v3.services.YouTubeService#getVideoRating(java.lang.String, java.lang.String)
+   */
+  @Override
+  public YouTubeRatingResponse getVideoRating(
+    String accessToken,
+    String videoId)
+  {
+    return service.getVideoRating("Bearer " + accessToken, videoId, this.key);
+  }
+
+
+  /* (non-Javadoc)
    * @see com.google.youtube.v3.services.YouTubeService#getVideos(java.lang.String, java.lang.String, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
    */
   @Override
@@ -121,6 +135,19 @@ public class YouTubeServiceImpl implements YouTubeService
     String fields)
   {
     return service.getVideos(part, id, maxResults, pageToken, this.key, fields);
+  }
+
+
+  /* (non-Javadoc)
+   * @see com.google.youtube.v3.services.YouTubeService#rateVideo(java.lang.String, com.google.youtube.v3.services.YouTubeService.Rating)
+   */
+  @Override
+  public void rateVideo(//
+    String id, //
+    Rating rating,
+    String fields)
+  {
+    service.rateVideo(id, rating.toString(), this.key, fields);
   }
 
 

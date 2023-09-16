@@ -6,12 +6,11 @@ package com.google.youtube.v3.services;
 
 import java.util.List;
 
-import java.util.List;
-
 import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
+import com.google.youtube.v3.dto.YouTubeRatingResponse;
 import com.google.youtube.v3.dto.YouTubeResource;
 import com.google.youtube.v3.dto.YouTubeResponse;
 import com.google.youtube.v3.dto.YouTubeSnippet;
@@ -31,6 +30,23 @@ public interface YouTubeService
 {
 
   public static final Integer MAX_RESULTS = Integer.valueOf(50);
+
+  public enum Rating {
+    DISLIKE("dislike"), LIKE("like"), NONE("none");
+
+    private String name;
+
+    Rating(String name)
+    {
+      this.name = name;
+    }
+
+
+    public String toString()
+    {
+      return this.name;
+    }
+  };
 
   /**
    * @param <CD>
@@ -137,6 +153,18 @@ public interface YouTubeService
     String fields);
 
 
+
+  /**
+  * Retrieves the ratings that the authorized user gave to a list of specified videos
+  * 
+  * @param accessToken the Authorization token of the user (without "Bearer ")
+  * @param videoId specifies a comma-separated list of the YouTube video ID(s) for the resource(s) for which you are retrieving rating data. In a video resource, the id property specifies the video's ID.
+  * @return the ratings that the authorized user gave to a list of specified videos
+  */
+  YouTubeRatingResponse getVideoRating(//
+    String accessToken,
+    String videoId);
+
   /**
    * Returns a list of videos that match the API request parameters.
    * 
@@ -154,5 +182,23 @@ public interface YouTubeService
     String id,
     Integer maxResults,
     String pageToken,
+    String fields);
+
+
+  /**
+   * Add a like or dislike rating to a video or remove a rating from a video.
+   * 
+   * @param id The id parameter specifies the YouTube video ID of the video that is being rated or having its rating removed.
+   * @param rating Specifies the rating to record. Acceptable values are:
+   * 
+   * <ul>
+   *   <li>dislike – Records that the authenticated user disliked the video.</li>
+   *   <li>like – Records that the authenticated user liked the video.</li>
+   *   <li>none – Removes any rating that the authenticated user had previously set for the video.</li>
+   * </ul>
+   */
+  public void rateVideo(//
+    String id, //
+    Rating rating,
     String fields);
 }
