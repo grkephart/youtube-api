@@ -47,7 +47,7 @@ public class YouTubeServiceImpl implements YouTubeService
     String pageToken,
     String fields)
   {
-    return service.getChannels(part, id, maxResults, pageToken, this.key, fields);
+    return this.service.getChannels(part, id, maxResults, pageToken, this.key, fields);
   }
 
 
@@ -65,7 +65,7 @@ public class YouTubeServiceImpl implements YouTubeService
 
     do
     {
-      YouTubeChannelResponse channelResponse = service.getChannels(part, id,
+      YouTubeChannelResponse channelResponse = this.service.getChannels(part, id,
         YouTubeService.MAX_RESULTS, pageToken, this.key, fields);
 
       channels.addAll(Arrays.asList(channelResponse.getItems()));
@@ -91,7 +91,7 @@ public class YouTubeServiceImpl implements YouTubeService
     String pageToken,
     String fields)
   {
-    return service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key,
+    return this.service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key,
       fields);
   }
 
@@ -107,7 +107,7 @@ public class YouTubeServiceImpl implements YouTubeService
     String pageToken,
     String fields)
   {
-    return service.getPlaylistItems(part, playlistId, maxResults, pageToken, this.key, fields);
+    return this.service.getPlaylistItems(part, playlistId, maxResults, pageToken, this.key, fields);
   }
 
 
@@ -119,7 +119,7 @@ public class YouTubeServiceImpl implements YouTubeService
     String accessToken,
     String videoId)
   {
-    return service.getVideoRating("Bearer " + accessToken, videoId, this.key);
+    return this.service.getVideoRating("Bearer " + accessToken, videoId, this.key);
   }
 
 
@@ -134,7 +134,7 @@ public class YouTubeServiceImpl implements YouTubeService
     String pageToken,
     String fields)
   {
-    return service.getVideos(part, id, maxResults, pageToken, this.key, fields);
+    return this.service.getVideos(part, id, maxResults, pageToken, this.key, fields);
   }
 
 
@@ -147,7 +147,7 @@ public class YouTubeServiceImpl implements YouTubeService
     Rating rating,
     String fields)
   {
-    service.rateVideo(id, rating.toString(), this.key, fields);
+    this.service.rateVideo(id, rating.toString(), this.key, fields);
   }
 
 
@@ -163,7 +163,7 @@ public class YouTubeServiceImpl implements YouTubeService
     String type,
     String fields)
   {
-    return service.search(part, maxResults, pageToken, q, type, this.key, fields);
+    return this.service.search(part, maxResults, pageToken, q, type, this.key, fields);
   }
 
 }

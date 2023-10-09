@@ -99,13 +99,12 @@ public interface FeignYouTubeService
    * 
    * A call to this method has a quota cost of 1 unit.
    * 
-   * @param part       specifies a comma-separated list of one or more channel
-   *                   resource properties that the API response will include
+   * @param part       specifies a comma-separated list of one or more channel resource properties that the API response will include
    * @param playlistId
-     * @param maxResults  specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
-     * @param pageToken identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
+   * @param maxResults specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.
+   * @param pageToken  identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
    * @param key        Google API key
-     * @param fields The fields parameter filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
+   * @param fields     The fields parameter filters the API response, which only contains the resource parts identified in the part parameter value, so that the response only includes a specific set of fields.
    * @return
    */
   @GetMapping("/playlistItems")
@@ -127,7 +126,9 @@ public interface FeignYouTubeService
   /**
   * Retrieves the ratings that the authorized user gave to a list of specified videos
   * 
-  * @param videoId specifies a comma-separated list of the YouTube video ID(s) for the resource(s) for which you are retrieving rating data. In a video resource, the id property specifies the video's ID.
+  * @param accessToken
+  * @param id          the video ID
+  * @param key         Google API key
   * @return the ratings that the authorized user gave to a list of specified videos
   */
   @GetMapping("/videos/getRating")
