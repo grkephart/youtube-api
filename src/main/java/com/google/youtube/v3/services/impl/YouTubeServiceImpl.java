@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ import com.google.youtube.v3.services.YouTubeService;
 @Service
 public class YouTubeServiceImpl implements YouTubeService
 {
+  private static final Log    log = LogFactory.getLog(YouTubeServiceImpl.class);
   @Value("${google.apiKey}")
   private String              key;
   @Autowired
@@ -91,8 +94,8 @@ public class YouTubeServiceImpl implements YouTubeService
     String pageToken,
     String fields)
   {
-    return this.service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key,
-      fields);
+    return this.service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken,
+      this.key, fields);
   }
 
 
@@ -119,7 +122,11 @@ public class YouTubeServiceImpl implements YouTubeService
     String accessToken,
     String videoId)
   {
-    return this.service.getVideoRating("Bearer " + accessToken, videoId, this.key);
+    String bearerAccessToken = "Bearer " + accessToken;
+
+    log.info("[getVideoRating] bearerAccessToken=" + bearerAccessToken);
+    
+    return this.service.getVideoRating(bearerAccessToken, videoId, this.key);
   }
 
 
