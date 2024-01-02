@@ -4,8 +4,11 @@
 package com.google.youtube.v3.services.impl;
 
 
+import java.util.Map;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -173,8 +176,9 @@ public interface FeignYouTubeService
   /**
    * Add a like or dislike rating to a video or remove a rating from a video.
    * 
-   * @param id The id parameter specifies the YouTube video ID of the video that is being rated or having its rating removed.
+   * @param id     The id parameter specifies the YouTube video ID of the video that is being rated or having its rating removed.
    * @param rating Specifies the rating to record. Acceptable values are:
+   * @param key    Google API key
    * 
    * <ul>
    *   <li>dislike – Records that the authenticated user disliked the video.</li>
@@ -182,16 +186,9 @@ public interface FeignYouTubeService
    *   <li>none – Removes any rating that the authenticated user had previously set for the video.</li>
    * </ul>
    */
-  @GetMapping("/videos/rate")
+  @PostMapping("/videos/rate")
   public void rateVideo(//
-    @RequestParam("videoId")
-    String id, //
-    @RequestParam("rating")
-    String rating, //
-    @RequestParam("key")
-    String key, //
-    @RequestParam("fields")
-    String fields);
+      @RequestHeader(name = "Authorization") String authToken, Map<String, Object> values);
 
 
   /**

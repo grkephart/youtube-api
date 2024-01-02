@@ -18,6 +18,24 @@ public class YouTubeRating extends YouTubeResource<YouTubeRatingSnippet>
   private String             rating;
   private String             videoId;
 
+  public YouTubeRating()
+  {
+
+  }
+
+
+  /**
+   * @param videoId
+   * @param rating
+   */
+  public YouTubeRating(String videoId, String rating)
+  {
+    super();
+    this.videoId = videoId;
+    this.rating  = rating;
+  }
+
+
   /**
    * @return the rating
    */
@@ -75,8 +93,7 @@ public class YouTubeRating extends YouTubeResource<YouTubeRatingSnippet>
   /**
    * @param rating the rating to set
    */
-  public void setRating(
-    String rating)
+  public void setRating(String rating)
   {
     this.rating = rating;
   }
@@ -85,8 +102,7 @@ public class YouTubeRating extends YouTubeResource<YouTubeRatingSnippet>
   /**
    * @param videoId the videoId to set
    */
-  public void setVideoId(
-    String videoId)
+  public void setVideoId(String videoId)
   {
     this.videoId = videoId;
   }
