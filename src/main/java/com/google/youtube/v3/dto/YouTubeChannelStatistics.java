@@ -11,6 +11,7 @@ package com.google.youtube.v3.dto;
 public class YouTubeChannelStatistics extends YouTubeStatistics
 {
   private Integer subscriberCount;
+  private Integer videoCount;
   private Integer viewCount;
 
   /**
@@ -31,6 +32,15 @@ public class YouTubeChannelStatistics extends YouTubeStatistics
 
 
   /**
+   * @return the videoCount
+   */
+  public Integer getVideoCount()
+  {
+    return videoCount;
+  }
+
+
+  /**
    * @return the viewCount
    */
   public Integer getViewCount()
@@ -46,6 +56,16 @@ public class YouTubeChannelStatistics extends YouTubeStatistics
     Integer likeCount)
   {
     this.subscriberCount = likeCount;
+  }
+
+
+  /**
+   * @param videoCount the videoCount to set
+   */
+  public void setVideoCount(
+    Integer videoCount)
+  {
+    this.videoCount = videoCount;
   }
 
 
