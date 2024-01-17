@@ -9,10 +9,12 @@ import java.util.Map;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
+import com.google.youtube.v3.dto.YouTubeCommentThread;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
 import com.google.youtube.v3.dto.YouTubeRatingResponse;
@@ -174,11 +176,27 @@ public interface FeignYouTubeService
 
 
   /**
+   * @param authToken
+   * @param values.rating  Specifies the rating to record. Acceptable values are:
+   * @param values.key     Google API key
+   * @return
+   */
+  @PostMapping("/commentThreads")
+  YouTubeCommentThread insertCommentThread(
+    @RequestHeader(name = "Authorization")
+    String authToken,
+    @RequestParam("part")
+    String part,
+    @RequestBody
+    YouTubeCommentThread resource);
+
+
+  /**
    * Add a like or dislike rating to a video or remove a rating from a video.
    * 
-   * @param id     The id parameter specifies the YouTube video ID of the video that is being rated or having its rating removed.
-   * @param rating Specifies the rating to record. Acceptable values are:
-   * @param key    Google API key
+   * @param values.videoId The id parameter specifies the YouTube video ID of the video that is being rated or having its rating removed.
+   * @param values.rating  Specifies the rating to record. Acceptable values are:
+   * @param values.key     Google API key
    * 
    * <ul>
    *   <li>dislike – Records that the authenticated user disliked the video.</li>

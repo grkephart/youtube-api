@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
+import com.google.youtube.v3.dto.YouTubeCommentThread;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
 import com.google.youtube.v3.dto.YouTubeRatingResponse;
@@ -212,6 +213,20 @@ public interface YouTubeService
    */
   public YouTubeVideoResponse getVideos(//
       String part, String id, Integer maxResults, String pageToken, String fields);
+
+  /**
+   * @param accessToken
+   * @param channelId
+   * @param videoId
+   * @param comment
+   * @return 
+   */
+  public YouTubeCommentThread insertCommentThread(
+    String accessToken,
+    String channelId,
+    String videoId,
+    String comment);
+
 
   /**
    * Add a like or dislike rating to a video or remove a rating from a video.

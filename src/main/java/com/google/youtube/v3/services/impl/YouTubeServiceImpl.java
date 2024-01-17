@@ -18,7 +18,11 @@ import org.springframework.stereotype.Service;
 
 import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
+import com.google.youtube.v3.dto.YouTubeComment;
+import com.google.youtube.v3.dto.YouTubeCommentSnippet;
+import com.google.youtube.v3.dto.YouTubeCommentThread;
 import com.google.youtube.v3.dto.YouTubeCommentThreadResponse;
+import com.google.youtube.v3.dto.YouTubeCommentThreadSnippet;
 import com.google.youtube.v3.dto.YouTubePlaylistItemsResponse;
 import com.google.youtube.v3.dto.YouTubeRatingResponse;
 import com.google.youtube.v3.dto.YouTubeResource;
@@ -146,6 +150,33 @@ public class YouTubeServiceImpl implements YouTubeService
   public YouTubeVideoResponse getVideos(String part, String id, Integer maxResults, String pageToken, String fields)
   {
     return this.service.getVideos(part, id, maxResults, pageToken, this.key, fields);
+  }
+
+
+  /* (non-Javadoc)
+   * @see com.google.youtube.v3.services.YouTubeService#insertCommentThread(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+   */
+  @Override
+  public YouTubeCommentThread insertCommentThread(
+    String accessToken,
+    String channelId,
+    String videoId, String text)
+  {
+    String bearerAccessToken = "Bearer " + accessToken;
+    YouTubeCommentThread resource = new YouTubeCommentThread();
+    YouTubeCommentThreadSnippet threadSnippet = new YouTubeCommentThreadSnippet();
+    YouTubeComment comment = new YouTubeComment();
+    YouTubeCommentSnippet commentSnippet = new YouTubeCommentSnippet();
+    String part = "snippet";
+    
+    commentSnippet.setTextOriginal(text);
+    comment.setSnippet(commentSnippet);
+    threadSnippet.setChannelId(channelId);
+    threadSnippet.setVideoId(videoId);
+    threadSnippet.setTopLevelComment(comment);
+    resource.setSnippet(threadSnippet);
+    
+    return this.service.insertCommentThread(bearerAccessToken, part, resource);
   }
 
 
