@@ -15,6 +15,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.google.youtube.v3.dto.YouTubeChannel;
 import com.google.youtube.v3.dto.YouTubeChannelResponse;
@@ -54,7 +55,12 @@ public class YouTubeServiceImpl implements YouTubeService
    * java.lang.String)
    */
   @Override
-  public YouTubeChannelResponse getChannels(String part, String id, Integer maxResults, String pageToken, String fields)
+  public YouTubeChannelResponse getChannels(
+    String part,
+    String id,
+    Integer maxResults,
+    String pageToken,
+    String fields)
   {
     return this.service.getChannels(part, id, maxResults, pageToken, this.key, fields);
   }
@@ -69,15 +75,18 @@ public class YouTubeServiceImpl implements YouTubeService
    * java.lang.String)
    */
   @Override
-  public List<YouTubeChannel> getChannels(String part, String id, String fields)
+  public List<YouTubeChannel> getChannels(
+    String part,
+    String id,
+    String fields)
   {
-    List<YouTubeChannel> channels  = new ArrayList<YouTubeChannel>();
-    String               pageToken = null;
+    List<YouTubeChannel> channels = new ArrayList<YouTubeChannel>();
+    String pageToken = null;
 
     do
     {
-      YouTubeChannelResponse channelResponse = this.service.getChannels(part, id, YouTubeService.MAX_RESULTS, pageToken,
-          this.key, fields);
+      YouTubeChannelResponse channelResponse = this.service.getChannels(part, id,
+        YouTubeService.MAX_RESULTS, pageToken, this.key, fields);
 
       channels.addAll(Arrays.asList(channelResponse.getItems()));
 
@@ -98,10 +107,18 @@ public class YouTubeServiceImpl implements YouTubeService
    * java.lang.String)
    */
   @Override
-  public YouTubeCommentThreadResponse getCommentThreads(String part, String channelId, String id, String videoId,
-      Integer maxResults, String pageToken, String fields)
+  public YouTubeCommentThreadResponse getCommentThreads(
+    String accessToken,
+    String part,
+    String channelId,
+    String id,
+    String videoId,
+    Integer maxResults,
+    String pageToken,
+    String fields)
   {
-    return this.service.getCommentThreads(part, channelId, id, videoId, maxResults, pageToken, this.key, fields);
+    return this.service.getCommentThreads(accessToken, part, channelId, id, videoId, maxResults,
+      pageToken, this.key, fields);
   }
 
 
@@ -114,8 +131,12 @@ public class YouTubeServiceImpl implements YouTubeService
    * java.lang.String, java.lang.String)
    */
   @Override
-  public YouTubePlaylistItemsResponse getPlaylistItems(String part, String playlistId, Integer maxResults,
-      String pageToken, String fields)
+  public YouTubePlaylistItemsResponse getPlaylistItems(
+    String part,
+    String playlistId,
+    Integer maxResults,
+    String pageToken,
+    String fields)
   {
     return this.service.getPlaylistItems(part, playlistId, maxResults, pageToken, this.key, fields);
   }
@@ -128,7 +149,9 @@ public class YouTubeServiceImpl implements YouTubeService
    * String, java.lang.String)
    */
   @Override
-  public YouTubeRatingResponse getVideoRating(String accessToken, String videoId)
+  public YouTubeRatingResponse getVideoRating(
+    String accessToken,
+    String videoId)
   {
     String bearerAccessToken = "Bearer " + accessToken;
 
@@ -147,7 +170,12 @@ public class YouTubeServiceImpl implements YouTubeService
    * java.lang.String)
    */
   @Override
-  public YouTubeVideoResponse getVideos(String part, String id, Integer maxResults, String pageToken, String fields)
+  public YouTubeVideoResponse getVideos(
+    String part,
+    String id,
+    Integer maxResults,
+    String pageToken,
+    String fields)
   {
     return this.service.getVideos(part, id, maxResults, pageToken, this.key, fields);
   }
@@ -160,7 +188,8 @@ public class YouTubeServiceImpl implements YouTubeService
   public YouTubeCommentThread insertCommentThread(
     String accessToken,
     String channelId,
-    String videoId, String text)
+    String videoId,
+    String text)
   {
     String bearerAccessToken = "Bearer " + accessToken;
     YouTubeCommentThread resource = new YouTubeCommentThread();
@@ -168,14 +197,14 @@ public class YouTubeServiceImpl implements YouTubeService
     YouTubeComment comment = new YouTubeComment();
     YouTubeCommentSnippet commentSnippet = new YouTubeCommentSnippet();
     String part = "snippet";
-    
+
     commentSnippet.setTextOriginal(text);
     comment.setSnippet(commentSnippet);
     threadSnippet.setChannelId(channelId);
     threadSnippet.setVideoId(videoId);
     threadSnippet.setTopLevelComment(comment);
     resource.setSnippet(threadSnippet);
-    
+
     return this.service.insertCommentThread(bearerAccessToken, part, resource);
   }
 
@@ -189,12 +218,12 @@ public class YouTubeServiceImpl implements YouTubeService
    */
   @Override
   public void rateVideo(//
-      String accessToken, //
-      String videoId, //
-      Rating rating)
+    String accessToken, //
+    String videoId, //
+    Rating rating)
   {
     String bearerAccessToken = "Bearer " + accessToken;
-    Map<String,Object> values = new HashMap<>();
+    Map<String, Object> values = new HashMap<>();
 
     values.put("id", videoId);
     values.put("rating", rating.toString());
@@ -212,8 +241,13 @@ public class YouTubeServiceImpl implements YouTubeService
    * java.lang.String, java.lang.String)
    */
   @Override
-  public <S extends YouTubeSnippet, RS extends YouTubeResource<S>> YouTubeResponse<S, RS> search(String part,
-      Integer maxResults, String pageToken, String q, String type, String fields)
+  public <S extends YouTubeSnippet, RS extends YouTubeResource<S>> YouTubeResponse<S, RS> search(
+    String part,
+    Integer maxResults,
+    String pageToken,
+    String q,
+    String type,
+    String fields)
   {
     return this.service.search(part, maxResults, pageToken, q, type, this.key, fields);
   }

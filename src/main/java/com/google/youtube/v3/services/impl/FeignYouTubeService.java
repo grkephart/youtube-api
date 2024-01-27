@@ -81,6 +81,8 @@ public interface FeignYouTubeService
   */
   @GetMapping("/commentThreads")
   public YouTubeCommentThreadResponse getCommentThreads(//
+    @RequestHeader(name = "Authorization")
+    String accessToken,
     @RequestParam("part")
     String part, //
     @RequestParam(value = "channelId", required = false)

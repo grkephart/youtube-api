@@ -143,7 +143,7 @@ public interface YouTubeService
    * @return
    */
   public YouTubeCommentThreadResponse getCommentThreads(//
-      String part, String channelId, String id, String videoId, Integer maxResults, String pageToken, String fields);
+    String accessToken, String part, String channelId, String id, String videoId, Integer maxResults, String pageToken, String fields);
 
 
   /**
